@@ -4,28 +4,51 @@ include('views/includes/header.php');
 ?>
 
 <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title mb-0">Editar Producto</h3>
             </div>
             <div class="card-body">
                 <form method="POST" action="index.php?accion=actualizar">
-                    <input type="hidden" name="id" value="<?= $datos['id'] ?>">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($datos['idProducto']) ?>">
                     
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre del Producto</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" 
-                               value="<?= htmlspecialchars($datos['nombre']) ?>" required>
+                        <label for="marca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca" 
+                               value="<?= htmlspecialchars($datos['marca']) ?>" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="precio" class="form-label">Precio</label>
-                        <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input type="number" class="form-control" id="precio" name="precio" 
-                                   value="<?= $datos['precio'] ?>" step="0.01" min="0" required>
-                        </div>
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" 
+                               value="<?= htmlspecialchars($datos['modelo']) ?>" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" required><?= htmlspecialchars($datos['descripcion']) ?></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="fechaIngreso" class="form-label">Fecha de Ingreso</label>
+                        <input type="date" class="form-control" id="fechaIngreso" name="fechaIngreso" 
+                               value="<?= htmlspecialchars($datos['fechaIngreso']) ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="estado" required>
+                            <option value="Ingresado" <?= ($datos['estado'] == 'Ingresado') ? 'selected' : '' ?>>Ingresado</option>
+                            <option value="En Reparación" <?= ($datos['estado'] == 'En Reparación') ? 'selected' : '' ?>>En Reparación</option>
+                            <option value="Finalizado" <?= ($datos['estado'] == 'Finalizado') ? 'selected' : '' ?>>Finalizado</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="idCliente" class="form-label">ID Cliente</label>
+                        <input type="number" class="form-control" id="idCliente" name="idCliente" 
+                               value="<?= htmlspecialchars($datos['idCliente']) ?>" required>
                     </div>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">

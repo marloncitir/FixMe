@@ -1,8 +1,9 @@
-<?
+<?php
 require_once("config/conexion.php");
-require_once("templates/css.css");
+require_once("views/templates/css.css");
 ?>
-<link rel="stylesheet" href="css.css">   
+
+<link rel="stylesheet" href="css.css">  
 
 <header>
     <h2>Lista de Usuarios</h2>
@@ -12,16 +13,16 @@ require_once("templates/css.css");
 <br>
 <a href="UsuarioI.php?accion=crear">Crear nuevo Usuario</a>
 
-<?php foreach ($resultados as $p): ?>
+<?php if (empty($resultados)): ?>
+    <p>No hay usuarios registrados.</p>
+<?php else: ?>
+    <?php foreach ($resultados as $p): ?>
+    <p>
+        <?= htmlspecialchars($p['nombre']) ?> - <?= htmlspecialchars($p['email']) ?> - <?= htmlspecialchars($p['telefono']) ?> - <?= htmlspecialchars($p['direccion']) ?> - <?= htmlspecialchars($p['fechaRegistro']) ?>
 
-<p>
+        <a href="UsuarioI.php?accion=editar&id=<?= htmlspecialchars($p['idCliente']) ?>">Editar</a>
 
-    <?= $p['nombre'] ?> - $<?= $p['email'] ?>
-
-    <a href="index.php?accion=editar&id=<?= $p['id'] ?>">Editar</a>
-
-    <a href="index.php?accion=borrar&id=<?= $p['id'] ?>" onclick="return confirm('¿Seguro que quieres borrar este producto?');">Borrar</a> 
-
-</p>
-
-<?php endforeach; ?>
+        <a href="UsuarioI.php?accion=borrar&id=<?= htmlspecialchars($p['idCliente']) ?>" onclick="return confirm('¿Seguro que quieres borrar este usuario?');">Borrar</a>
+    </p>
+    <?php endforeach; ?>
+<?php endif; ?>

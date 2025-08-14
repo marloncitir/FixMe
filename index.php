@@ -1,17 +1,25 @@
 <?php
+
+require_once("config/conexion.php");
+require_once("models/Producto.php");
+require_once("models/Usuario.php");
+require_once("models/Tecnico.php");
+require_once("models/Reparacion.php");
 require_once("controllers/ProductoController.php");
-$controller = new ProductoController();
+require_once("controllers/UsuarioController.php");
+
+$controlador = $_GET['controlador'] ?? 'Producto';
 $accion = $_GET['accion'] ?? 'index';
-if ($accion == 'crear') { // NUEVO
-$controller->crear();
-} elseif ($accion == 'guardar') { // NUEVO
-$controller->guardar();
-} elseif ($accion == 'editar') {
-$controller->editar();
-} elseif ($accion == 'actualizar') {
-$controller->actualizar();
-} elseif ($accion == 'borrar') { // NUEVO
-$controller->borrar();
+
+$nombreClase = $controlador . 'Controller';
+$controller = new $nombreClase($conn);
+
+if (method_exists($controller, $accion)) {
+    $controller->$accion();
 } else {
-$controller->index();
+    echo "Error 404: La acción no existe.";
 }
+
+$conn->close();
+
+?>

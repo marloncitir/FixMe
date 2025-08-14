@@ -1,29 +1,29 @@
 <?php
-class Usuario {
+class Tecnico {
     private $db;
 
     public function __construct($db) {
         $this->db = $db;
     }
 
-    public function crear($nombre, $email, $telefono, $direccion, $fechaRegistro) {
-        $sql = "INSERT INTO Cliente (nombre, email, telefono, direccion, fechaRegistro) 
+    public function crear($nombre, $especializacion, $email, $telefono, $fechaRegistro) {
+        $sql = "INSERT INTO Tecnico (nombre, especializacion, email, telefono, fechaRegistro) 
                 VALUES (?, ?, ?, ?, ?)";
         
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("sssss", $nombre, $email, $telefono, $direccion, $fechaRegistro);
+        $stmt->bind_param("sssss", $nombre, $especializacion, $email, $telefono, $fechaRegistro);
         
         return $stmt->execute();
     }
-    
+
     public function listar() {
-        $sql = "SELECT * FROM Cliente";
+        $sql = "SELECT * FROM Tecnico";
         $resultado = $this->db->query($sql);
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
-
+    
     public function buscarPorId($id) {
-        $sql = "SELECT * FROM Cliente WHERE idCliente = ?";
+        $sql = "SELECT * FROM Tecnico WHERE idTecnico = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -31,20 +31,20 @@ class Usuario {
         
         return $resultado->fetch_assoc();
     }
-    
-    public function actualizar($id, $nombre, $email, $telefono, $direccion, $fechaRegistro) {
-        $sql = "UPDATE Cliente 
-                SET nombre=?, email=?, telefono=?, direccion=?, fechaRegistro=? 
-                WHERE idCliente=?";
+
+    public function actualizar($id, $nombre, $especializacion, $email, $telefono, $fechaRegistro) {
+        $sql = "UPDATE Tecnico 
+                SET nombre=?, especializacion=?, email=?, telefono=?, fechaRegistro=? 
+                WHERE idTecnico=?";
         
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("sssssi", $nombre, $email, $telefono, $direccion, $fechaRegistro, $id);
+        $stmt->bind_param("sssssi", $nombre, $especializacion, $email, $telefono, $fechaRegistro, $id);
         
         return $stmt->execute();
     }
-    
+
     public function borrar($id) {
-        $sql = "DELETE FROM Cliente WHERE idCliente = ?";
+        $sql = "DELETE FROM Tecnico WHERE idTecnico = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("i", $id);
         

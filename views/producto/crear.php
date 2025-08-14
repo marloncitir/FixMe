@@ -4,7 +4,7 @@ include('views/includes/header.php');
 ?>
 
 <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title mb-0">Crear Nuevo Producto</h3>
@@ -12,22 +12,32 @@ include('views/includes/header.php');
             <div class="card-body">
                 <form method="POST" action="index.php?accion=guardar">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre del Producto</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        <label for="marca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca" required>
                     </div>
-                    
                     <div class="mb-3">
-                        <label for="precio" class="form-label">Precio</label>
-                        <div class="input-group">
-                            <span class="input-group-text">$</span>
-                            <input type="number" class="form-control" id="precio" name="precio" 
-                                   step="0.01" min="0" required>
-                        </div>
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" required>
                     </div>
-
                     <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-                        <input class="form-control" type="file" id="formFileMultiple" multiple>
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fechaIngreso" class="form-label">Fecha de Ingreso</label>
+                        <input type="date" class="form-control" id="fechaIngreso" name="fechaIngreso" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="estado" required>
+                            <option value="Ingresado">Ingresado</option>
+                            <option value="En Reparación">En Reparación</option>
+                            <option value="Finalizado">Finalizado</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="idCliente" class="form-label">ID Cliente</label>
+                        <input type="number" class="form-control" id="idCliente" name="idCliente" required>
                     </div>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">

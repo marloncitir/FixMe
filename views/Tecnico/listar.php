@@ -1,20 +1,15 @@
-<?php 
-$titulo = "Lista de Productos";
-include('views/includes/header.php'); 
-?>
-
 <div class="row">
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Lista de Productos</h2>
-            <a href="index.php?accion=crear" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> Crear nuevo producto
+            <h2>Lista de Técnicos</h2>
+            <a href="index.php?controlador=Tecnico&accion=crear" class="btn btn-primary">
+                Crear nuevo técnico
             </a>
         </div>
         
         <?php if (empty($resultados)): ?>
             <div class="alert alert-info">
-                No hay productos registrados. <a href="index.php?accion=crear">Crear el primero</a>
+                No hay técnicos registrados.
             </div>
         <?php else: ?>
             <div class="card">
@@ -24,30 +19,30 @@ include('views/includes/header.php');
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Estado</th>
-                                    <th>Fecha de Ingreso</th>
+                                    <th>Nombre</th>
+                                    <th>Especialización</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($resultados as $p): ?>
+                                <?php foreach ($resultados as $t): ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($p['idProducto']) ?></td>
-                                    <td><?= htmlspecialchars($p['marca']) ?></td>
-                                    <td><?= htmlspecialchars($p['modelo']) ?></td>
-                                    <td><?= htmlspecialchars($p['estado']) ?></td>
-                                    <td><?= htmlspecialchars($p['fechaIngreso']) ?></td>
+                                    <td><?= htmlspecialchars($t['idTecnico']) ?></td>
+                                    <td><?= htmlspecialchars($t['nombre']) ?></td>
+                                    <td><?= htmlspecialchars($t['especializacion']) ?></td>
+                                    <td><?= htmlspecialchars($t['email']) ?></td>
+                                    <td><?= htmlspecialchars($t['telefono']) ?></td>
                                     <td>
                                         <div class="btn-group-actions d-flex">
-                                            <a href="index.php?accion=editar&id=<?= htmlspecialchars($p['idProducto']) ?>" 
+                                            <a href="index.php?controlador=Tecnico&accion=editar&id=<?= htmlspecialchars($t['idTecnico']) ?>" 
                                                class="btn btn-sm btn-outline-primary">
                                                Editar
                                             </a>
-                                            <a href="index.php?accion=borrar&id=<?= htmlspecialchars($p['idProducto']) ?>" 
+                                            <a href="index.php?controlador=Tecnico&accion=borrar&id=<?= htmlspecialchars($t['idTecnico']) ?>" 
                                                class="btn btn-sm btn-outline-danger"
-                                               onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
+                                               onclick="return confirm('¿Seguro que quieres eliminar a este técnico?');">
                                                Borrar
                                             </a>
                                         </div>
@@ -62,5 +57,3 @@ include('views/includes/header.php');
         <?php endif; ?>
     </div>
 </div>
-
-<?php include('views/includes/footer.php'); ?>
