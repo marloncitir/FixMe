@@ -1,13 +1,12 @@
 <?php
-
 require_once("config/conexion.php");
-require_once("models/Producto.php");
-require_once("models/Usuario.php");
-require_once("models/Tecnico.php");
-require_once("models/Reparacion.php");
+require_once("models/producto.php");
+require_once("models/usuario.php");
+require_once("models/tecnico.php");
+require_once("models/reparacion.php");
 require_once("controllers/ProductoController.php");
 require_once("controllers/UsuarioController.php");
-
+require_once("controllers/ReparacionController.php")
 $controlador = $_GET['controlador'] ?? 'Producto';
 $accion = $_GET['accion'] ?? 'index';
 

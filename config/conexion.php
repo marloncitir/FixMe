@@ -1,10 +1,9 @@
 <?php
-<<<<<<< Updated upstream
 
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "FixMe";
+$dbname = "fixme";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -12,7 +11,6 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-=======
 function conectar() {
     $host = 'localhost';
     $usuario = 'root';
@@ -27,5 +25,5 @@ function conectar() {
 
     return $conexion;
 }
->>>>>>> Stashed changes
+
 ?>
