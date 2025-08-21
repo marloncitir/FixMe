@@ -1,13 +1,15 @@
 <?php
-class Tecnico {
+require_once("config/conexion.php");
+
+class tecnico {
     private $db;
 
-    public function __construct($db) {
-        $this->db = $db;
+    public function __construct() {
+        $this->db = conectar();
     }
 
-    public function crear($nombre, $especializacion, $email, $telefono, $fechaRegistro) {
-        $sql = "INSERT INTO Tecnico (nombre, especializacion, email, telefono, fechaRegistro) 
+    public function Registarse($nombre, $especializacion, $email, $telefono, $fechaRegistro) {
+        $sql = "INSERT INTO tecnico (nombre, especializacion, email, telefono, fechaRegistro) 
                 VALUES (?, ?, ?, ?, ?)";
         
         $stmt = $this->db->prepare($sql);
@@ -15,25 +17,14 @@ class Tecnico {
         
         return $stmt->execute();
     }
-
-    public function listar() {
-        $sql = "SELECT * FROM Tecnico";
+        public function verReparacionesAsignadas() {
+        $sql = "SELECT * FROM tecnico";
         $resultado = $this->db->query($sql);
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
-    
-    public function buscarPorId($id) {
-        $sql = "SELECT * FROM Tecnico WHERE idTecnico = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        
-        return $resultado->fetch_assoc();
-    }
 
-    public function actualizar($id, $nombre, $especializacion, $email, $telefono, $fechaRegistro) {
-        $sql = "UPDATE Tecnico 
+    public function actualizarDatos($id, $nombre, $especializacion, $email, $telefono, $fechaRegistro) {
+        $sql = "UPDATE tecnico 
                 SET nombre=?, especializacion=?, email=?, telefono=?, fechaRegistro=? 
                 WHERE idTecnico=?";
         
@@ -43,11 +34,7 @@ class Tecnico {
         return $stmt->execute();
     }
 
-    public function borrar($id) {
-        $sql = "DELETE FROM Tecnico WHERE idTecnico = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("i", $id);
-        
-        return $stmt->execute();
-    }
+
+
+
 }

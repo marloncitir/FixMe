@@ -1,24 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FixMe</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffeef5;
+            font-family: 'Segoe UI', sans-serif;
+            color: #5e4b4b;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #d36f9e;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #6e5e5e;
+        }
+
+        a.boton {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #f7a7c6;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        a.boton:hover {
+            background-color: #e68bb0;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 15px;
+            font-size: 0.9em;
+            color: #a68a8a;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bienvenido al Sistema FixMe</h1>
+    
+</body>
+</html>
+
 <?php
 require_once("config/conexion.php");
-require_once("models/producto.php");
-require_once("models/usuario.php");
-require_once("models/tecnico.php");
-require_once("models/reparacion.php");
 require_once("controllers/ProductoController.php");
+require_once("controllers/ReparacionController.php");
+require_once("controllers/TecnicoController.php");
 require_once("controllers/UsuarioController.php");
-require_once("controllers/ReparacionController.php")
-$controlador = $_GET['controlador'] ?? 'Producto';
+$productocontroller = new ProductoController();
+$tecnicoontroller = new TecnicoController();
+$reparacioncontroller = new ReparacionController();
+$usuariocontroller = new UsuarioController();
+
 $accion = $_GET['accion'] ?? 'index';
 
-$nombreClase = $controlador . 'Controller';
-$controller = new $nombreClase($conn);
-
-if (method_exists($controller, $accion)) {
-    $controller->$accion();
+if ($accion == 'crear') {
+    $productocontroller->crear();
+} elseif ($accion == 'guardar') {
+    $productocontroller->guardar();
+} elseif ($accion == 'editar') {
+    $productocontroller->editar();
+} elseif ($accion == 'actualizar') {
+    $productocontroller->actualizar();
+} elseif ($accion == 'borrar') {
+    $productocontroller->borrar();
 } else {
-    echo "Error 404: La acción no existe.";
+    $productocontroller->index();
 }
 
-$conn->close();
+if ($accion == 'crear') {
+    $reparacioncontroller->crear();
+} elseif ($accion == 'guardar') {
+    $reparacioncontroller->guardar();
+} elseif ($accion == 'editar') {
+    $reparacioncontroller->editar();
+} elseif ($accion == 'actualizar') {
+    $reparacioncontroller->actualizar();
+} elseif ($accion == 'borrar') {
+    $reparacioncontroller->borrar();
+} else {
+    $reparacioncontroller->index();
+}
 
+if ($accion == 'crear') {
+    $usuariocontroller->crear();
+} elseif ($accion == 'guardar') {
+    $usuariocontroller->guardar();
+} elseif ($accion == 'editar') {
+    $usuariocontroller->editar();
+} elseif ($accion == 'actualizar') {
+    $usuariocontroller->actualizar();
+} elseif ($accion == 'borrar') {
+    $usuariocontroller->borrar();
+} else {
+    $usuariocontroller->index();
+}
+
+if ($accion == 'crear') {
+    $tecnicocontroller->crear();
+} elseif ($accion == 'guardar') {
+    $tecnicocontroller->guardar();
+} elseif ($accion == 'editar') {
+    $tecnicocontroller->editar();
+} elseif ($accion == 'actualizar') {
+    $tecnicocontroller->actualizar();
+} elseif ($accion == 'borrar') {
+    $tecnicocontroller->borrar();
+} else {
+    $tecnicocontroller->index();
+}
 ?>

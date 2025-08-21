@@ -1,24 +1,29 @@
 <?php
-class Producto {
-    public function crear($marca, $modelo, $descripcion, $fechaIngreso, $estado, $idCliente) {
-        $sql = "INSERT INTO Producto (marca, modelo, descripcion, fechaIngreso, estado, idCliente) 
-                VALUES ('$marca', '$modelo', '$descripcion', '$fechaIngreso', '$estado', '$idCliente')";
+require_once("config/conexion.php");
+
+class producto {
+    private $db;
+
+    public function __construct() {
+        $this->db = conectar();
+    }
+
+    public function RegistrarProducto($modelo, $marca, $descripcion, $fechaIngreso, $estado) {
+        $sql = "INSERT INTO producto (modelo, marca, descripcion, fechaIngreso, estado) VALUES ('$modelo', '$marca', '$descripcion', '$fechaIngreso', '$estado')";
         return $this->db->query($sql);
     }
-    
-    public function buscarPorId($id) {
-        $sql = "SELECT * FROM Producto WHERE idProducto = $id";
-        return $this->db->query($sql)->fetch_assoc();
-    }
-    
-    public function actualizar($id, $marca, $modelo, $descripcion, $fechaIngreso, $estado, $idCliente) {
-        $sql = "UPDATE Producto SET marca='$marca', modelo='$modelo', descripcion='$descripcion', fechaIngreso='$fechaIngreso', estado='$estado', idCliente='$idCliente' WHERE idProducto=$id";
+
+    public function obtenerHistorial() {
+        $sql = "SELECT * FROM producto";
         return $this->db->query($sql);
     }
-    
-    public function borrar($id) {
-        $sql = "DELETE FROM Producto WHERE idProducto = $id";
+
+    public function actualizarEstado($estado) {
+        $sql = "UPDATE producto SET estado='$estado' WHERE id='$idProducto'";
         return $this->db->query($sql);
     }
+
 }
+
 ?>
+  
