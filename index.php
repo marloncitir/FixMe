@@ -66,11 +66,11 @@ require_once("config/conexion.php");
 require_once("controllers/ProductoController.php");
 require_once("controllers/ReparacionController.php");
 require_once("controllers/TecnicoController.php");
-require_once("controllers/UsuarioController.php");
+require_once("controllers/ClienteController.php");
 $productocontroller = new ProductoController();
 $tecnicoontroller = new TecnicoController();
 $reparacioncontroller = new ReparacionController();
-$usuariocontroller = new UsuarioController();
+$usuariocontroller = new ClienteController();
 
 $accion = $_GET['accion'] ?? 'index';
 
@@ -103,17 +103,17 @@ if ($accion == 'crear') {
 }
 
 if ($accion == 'crear') {
-    $usuariocontroller->crear();
+    $clientecontroller->crear();
 } elseif ($accion == 'guardar') {
-    $usuariocontroller->guardar();
+    $clientecontroller->guardar();
 } elseif ($accion == 'editar') {
-    $usuariocontroller->editar();
+    $clientecontroller->editar();
 } elseif ($accion == 'actualizar') {
-    $usuariocontroller->actualizar();
+    $clientecontroller->actualizar();
 } elseif ($accion == 'borrar') {
-    $usuariocontroller->borrar();
+    $clientecontroller->borrar();
 } else {
-    $usuariocontroller->index();
+    $clientecontroller->index();
 }
 
 if ($accion == 'crear') {
